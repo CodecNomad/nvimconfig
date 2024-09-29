@@ -5,6 +5,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set nu
+set relativenumber
+set cursorline
 ]])
 
 vim.g.mapleader = " "
@@ -60,17 +62,18 @@ vim.cmd("colorscheme catppuccin")
 
 -- Treesitter Configuration
 require("nvim-treesitter.configs").setup({
-    ensure_installed = { "lua", "python", "rust" },
+    ensure_installed = { "lua", "python", "javascript", "typescript", "c", "rust" },
     highlight = { enable = true },
     indent = { enable = true }
 })
 
 -- LSP Setup
 local lspconfig = require("lspconfig")
-lspconfig.lua_ls.setup({})
-lspconfig.pyright.setup({})
-lspconfig.eslint.setup({})
-lspconfig.clangd.setup({})
+lspconfig.lua_ls.setup{}
+lspconfig.pyright.setup{}
+lspconfig.eslint.setup{}
+lspconfig.clangd.setup{}
+lspconfig.rust_analyzer.setup{}
 
 -- Completion Engine Setup (nvim-cmp)
 local cmp = require("cmp")
