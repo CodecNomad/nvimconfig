@@ -31,8 +31,6 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-    { "williamboman/mason.nvim" },
-    { "williamboman/mason-lspconfig.nvim" },
     { "neovim/nvim-lspconfig" },
     {
         'hrsh7th/nvim-cmp',
@@ -67,12 +65,7 @@ require("nvim-treesitter.configs").setup({
     indent = { enable = true }
 })
 
--- Mason and LSP Setup
-require("mason").setup()
-require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "pyright", "rust_analyzer" }
-})
-
+-- LSP Setup
 local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({})
 lspconfig.pyright.setup({})
