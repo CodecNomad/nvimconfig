@@ -7,6 +7,8 @@ set shiftwidth=4
 set nu
 set relativenumber
 set cursorline
+set autoindent
+set smartindent
 ]])
 
 vim.g.mapleader = " "
@@ -51,7 +53,11 @@ local plugins = {
             "MunifTanjim/nui.nvim",
         }
     },
-    { "lambdalisue/vim-suda" }
+    { "lambdalisue/vim-suda" },
+    {
+        'freddiehaddad/feline.nvim',
+        opts = {}
+    },
 }
 
 require("lazy").setup(plugins, {})
@@ -62,18 +68,21 @@ vim.cmd("colorscheme catppuccin")
 
 -- Treesitter Configuration
 require("nvim-treesitter.configs").setup({
-    ensure_installed = { "lua", "python", "javascript", "typescript", "c", "rust" },
+    ensure_installed = { "lua", "python", "javascript", "typescript", "c", "rust", "css", "html" },
     highlight = { enable = true },
-    indent = { enable = true }
+    indent = { enable = true }, -- Ensure indentation is enabled
+    autopairs = { enable = true },
 })
 
 -- LSP Setup
 local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup{}
+lspconfig.ts_ls.setup{}
 lspconfig.pyright.setup{}
 lspconfig.eslint.setup{}
 lspconfig.clangd.setup{}
 lspconfig.rust_analyzer.setup{}
+lspconfig.html.setup{}
 
 -- Completion Engine Setup (nvim-cmp)
 local cmp = require("cmp")
@@ -142,3 +151,4 @@ end
 
 -- Keymap to Toggle Neo-tree
 vim.keymap.set("n", "<C-n>", ToggleNeoTree)
+
